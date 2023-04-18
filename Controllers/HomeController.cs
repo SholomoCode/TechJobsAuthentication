@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using TechJobsAuthentication.Models;
 using TechJobsAuthentication.Data;
 using TechJobsAuthentication.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TechJobsAuthentication.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private JobDbContext context;
@@ -15,6 +17,7 @@ namespace TechJobsAuthentication.Controllers
             context = dbContext;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             List<Job> jobs = context.Jobs.ToList();
